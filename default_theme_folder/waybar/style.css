@@ -1,0 +1,130 @@
+@define-color bgcolor rgba(0, 0, 0, 0);
+@define-color fgcolor rgba(0, 0, 0, 1);
+@define-color textcolor rgba(255, 255, 255, 1);
+@define-color highlight rgba(73, 230, 31, 1);
+
+@define-color red-warning rgba(218, 30, 40, 1);
+@define-color green-warning rgba(25, 128, 56, 1);
+@define-color yellow-warning rgba(241, 194, 27, 1);
+
+/* Reset all styles */
+* {
+	border: none;
+	border-radius: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#waybar {
+	background: @bgcolor;
+	font-family: MesloLGS NF;
+	font-size: large;
+	color: @textcolor;
+}
+
+#window,
+#workspaces,
+#custom-weather,
+#cpu, 
+#temperature, 
+#memory, 
+#pulseaudio, 
+#disk,
+#battery, 
+#clock, 
+#network,
+#backlight{
+	background: @fgcolor;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+#custom-cap-left, #custom-cap-right {
+	color: @fgcolor;
+	font-size: 24px;
+}
+
+#custom-spotify{
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: rgba(20, 20, 20, 0.4);
+	color:#FFF;
+}
+
+#workspaces {
+	background-color: @fgcolor;
+}
+#workspaces button {
+	padding-left: 2px;
+	padding-right: 2px;
+	background-color: inherit;
+	color: @textcolor;
+}
+
+#workspaces button.active {
+	border-bottom: 1px solid @highlight;
+	color: @highlight;
+}
+ 
+#workspaces button:hover {
+	color: @highlight;
+	transition: none;
+	background: inherit;
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+
+#window {
+	padding: 0px;
+	color: @highlight;
+}
+
+#disk.critical,
+#temperature.critical,
+#cpu.critical,
+#memory.critical{
+		color: @red-warning;
+}
+
+@keyframes charging {
+	to {
+		color: @green-warning;
+	}
+}
+
+#battery.charging {
+		animation-name: green-warning;
+		animation-duration: 10s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+}
+
+@keyframes low_battery {
+	to {
+		color: @yellow-warning;
+	}
+}
+
+#battery.warning:not(.charging) {
+  	animation-name: low_battery;
+  	animation-duration: 5s;
+  	animation-timing-function: ease-in-out;
+  	animation-iteration-count: infinite;
+  	animation-direction: alternate;
+}
+
+@keyframes critical_battery {
+	to {
+		color: @red-warning;
+	}
+}
+
+#battery.critical:not(.charging) {
+  	animation-name: critical_battery;
+  	animation-duration: 2.5s;
+  	animation-timing-function: ease-in-out;
+  	animation-iteration-count: infinite;
+  	animation-direction: alternate;
+}
